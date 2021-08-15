@@ -1,0 +1,2202 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<!-- Avoid google page translate -->
+	<meta name="google" content="notranslate">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" href="../static/images/favicon-32x32.png" sizes="32x32">
+
+	<!-- Standard CSS & JavaScript -->
+	<link rel="stylesheet" href="../static/css/global.css">
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap-table.min.css">
+	<link rel="stylesheet" href="../static/css/bootstrapValidator.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/loading.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/select2-bootstrap.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="../static/js/jquery-2.1.3.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/bootstrap-table.min.js"></script>
+	<script src="../static/js/common.js"></script>
+	<script src="../static/js/bootstrapValidator.min.js"></script>
+	<script src="../static/js/select2.min.js"></script>
+
+	<title>Cargofl Manage Apps</title>
+
+	<style>
+		.cargofl-app:hover {
+			transform: scale(1.1);
+		}
+
+		.cargofl-app {
+			height: 160px;
+			border-radius: 3px;
+			box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+			background: white;
+			transition: transform 0.2s ease-in-out;
+			cursor: pointer;
+			margin-bottom: 30px;
+			padding: 10px;
+		}
+
+		.cargofl-app-title {
+			font-size: 18px;
+			font-weight: 600;
+		}
+
+		.cargofl-app-logo {
+			width: -webkit-fill-available;
+			min-height: 100px;
+			background-repeat: no-repeat !important;
+			background-size: contain !important;
+			background-position: center !important;
+		}
+
+		.cargofl-app-short-description {
+			color: grey;
+		}
+
+		.cargofl-app-actions {
+			text-align: right;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<!-- include header and menu -->
+	<!-- common stylesheet [TO BE MOVED TO COMMON INCLUED FILE] -->
+	<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
+
+	<style>
+		.navbar-nav {
+			float: right;
+		}
+
+		.navbar-nav li a {
+			font-size: small;
+			color: black;
+			padding: 5px 10px;
+		}
+
+		/*
+	.dropdown:hover > .dropdown-menu {
+		display: block;
+	}
+	*/
+		.navbar-nav .dropdown-menu {
+			/*right: 0;*/
+			left: auto;
+			min-width: 100px;
+			z-index: 1001;
+		}
+
+		.cargofl-site-title {
+			font-size: 2vmax;
+			font-weight: bold;
+			color: var(--primary-color);
+			display: inline-flex;
+			align-items: flex-end;
+		}
+
+		.cargofl-site-logo {
+			height: 50px;
+		}
+
+		.cargofl-header {
+			margin: 5px 30px;
+		}
+
+		.cargofl-header-text {
+			color: var(--primary-color);
+			font-size: 14px;
+		}
+
+		.cargofl-menubar {
+			background-color: var(--primary-color);
+			width: 100%;
+			margin: 0px !important;
+		}
+
+		.cargofl-menubar .dropdown>.dropdown-toggle {
+			font-size: small;
+			color: white;
+			padding: 5px 10px;
+		}
+
+		.cargofl-menubar .open>a,
+		.cargofl-menubar .open>a:focus,
+		.cargofl-menubar .open>a:hover,
+		.cargofl-menubar>li>a:focus,
+		.cargofl-menubar>li>a:hover {
+			background-color: var(--secondary-color) !important;
+		}
+
+		.navbar {
+			margin: 0;
+
+		}
+
+		.dropdown-menu .sub-menu {
+			left: 100%;
+			position: absolute;
+			top: 0;
+			visibility: hidden;
+			margin-top: -1px;
+		}
+
+
+		/* open dropdown menu on hover */
+		.dropdown:hover>.dropdown-menu {
+			visibility: visible;
+			display: block;
+		}
+
+		/* open dropdown sub menu on hover */
+		.dropdown-menu li:hover .sub-menu {
+			visibility: visible;
+			display: block;
+		}
+
+		.navbar .sub-menu:before {
+			border-bottom: 7px solid transparent;
+			border-left: none;
+			border-right: 7px solid rgba(0, 0, 0, 0.2);
+			border-top: 7px solid transparent;
+			left: -7px;
+			top: 10px;
+		}
+
+		.navbar .sub-menu:after {
+			border-top: 6px solid transparent;
+			border-left: none;
+			border-right: 6px solid #fff;
+			border-bottom: 6px solid transparent;
+			left: 10px;
+			top: 11px;
+			left: -6px;
+		}
+	</style>
+
+	<nav class="navbar">
+		<div class="dtplus-border">
+
+			<!-- logo and top bar -->
+			<div class="cargofl-header flex-container">
+				<span class="flex-item-3">
+					<img src="../static/images/logo.png" class="pull-left cargofl-site-logo">
+				</span>
+				<span class="flex-item-3">
+					<span class="cargofl-site-title"></span>
+				</span>
+				<span class="flex-item-3">
+					<div class="pull-right cargofl-header-text">
+						Welcome, <b>Franchise Deveer Decors</b>&nbsp;<br>
+						<a alt="Logout" style="cursor: pointer;" onclick="location.href = '/logout';"><img
+								class="pull-right" style="height: 20px;" src="../static/images/logout.png"></a>
+						<!-- <button class="pull-right dtplus-logout-btn" alt="Logout" onclick="location.href = '/logout';"></button> -->
+						<ul class="nav navbar-nav">
+
+							<!-- <li><a href="#contact" data-toggle="collapse">Contact</a></li> -->
+							<!-- <li><a href="/logout">Logout</a></li> -->
+						</ul>
+					</div>
+					<div id="contact" class="collapse pull-right">
+						<code>contact@innoctive.com / +91 - 83290 83054</code>
+					</div>
+				</span>
+			</div>
+
+			<!-- menu bar -->
+			<div>
+				<ul class="nav navbar-nav cargofl-menubar">
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" href="/loadboard" onclick="myFunction()"><i
+								class="fa fa-home"></i></a>
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Operations <span
+								class="caret"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="/loadboard">Load Board</a></li>
+
+
+
+
+
+
+							<li><a href="/managepdftoimage">PDF to Image</a></li>
+
+							<li><a href="/managebulkuploadpods">Bulk Upload PODs</a></li>
+
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Accounts <span
+								class="caret"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="/account">Accounts</a></li>
+							<li><a href="/party_account">Party Accounts</a></li>
+							<li><a href="/driver_account">Driver Accounts</a></li>
+							<li><a href="/managetransactions">Transactions</a></li>
+							<li><a href="/manageinvoice">Invoice</a></li>
+							<li><a href="/managevoucher">Voucher</a></li>
+
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Master <span
+								class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/managemetadata">Metadata</a></li>
+
+							<li><a href="/rate">Rate</a></li>
+
+
+							<li><a href="/manageresources">Resources</a></li>
+
+
+							<li><a href="/manage_transit_matrix">Transit Matrix</a></li>
+
+						</ul>
+					</li>
+
+
+					<!-- Start Inventory Management Head App Section -->
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Inventory <span
+								class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-toggle" href="#">Product Management <span
+										class="fa fa-caret-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/manage_product_master">Product Master </a></li>
+									<li><a href="manage_product_rate_master">Product Rate Master </a></li>
+								</ul>
+							</li>
+
+							<li>
+								<a class="dropdown-toggle" href="/manage_purchase_order">Purchase Order</a>
+							</li>
+
+
+
+							<li>
+								<a class="dropdown-toggle" href="/manage_material_indent">Material Indent</a>
+							</li>
+
+
+							<li>
+								<a class="dropdown-toggle" href="/manage_gate_pass">Gate Pass</a>
+							</li>
+
+
+							<li>
+								<a class="dropdown-toggle" href="/manage_purchase_local">Purchase Local</a>
+							</li>
+
+
+						</ul>
+					</li>
+					<!-- End Inventory Management Head App Section -->
+
+
+					<li class="dropdown">
+
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Analytics <span
+								class="caret"></span></a>
+						<ul class="dropdown-menu ">
+
+							<li><a href="/wall">Dispatch Wall</a></li>
+
+							<li><a href="/report">Reports</a></li>
+
+							<li><a href="/audit_trail">Audit Trail</a></li>
+
+						</ul>
+
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Custom <span
+								class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/custom_feature">Feature</a></li>
+						</ul>
+
+
+						<ul class="dropdown-menu">
+							<li class="dropdown">
+								<a class="dropdown-toggle" href="#" style="color: black;">Master<span
+										class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/ktc_manage_permit_master">Permit Master</a></li>
+									<li><a href="/ktc_manage_do_master">DO Master</a></li>
+									<li><a href="/ktc_manage_po_master">PO Master</a></li>
+									<li><a href="/ktc_manage_customer_rate_master">Customer Rate Master</a></li>
+									<li><a href="/ktc_manage_transporter_rate_master">Transporter Rate Master</a></li>
+								</ul>
+							</li>
+
+							<li class="dropdown">
+								<a class="dropdown-toggle" href="#" style="color: black;">Operations<span
+										class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/ktc_manage_coal_iron_ore_challan">Coal / Iron Ore</a></li>
+									<li><a href="#">Fly Ash</a></li>
+								</ul>
+							</li>
+						</ul>
+
+
+
+					</li>
+
+
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings <span
+								class="caret"></span></a>
+						<ul class="dropdown-menu">
+
+							<li><a href="/manageaccount">Profile</a></li>
+
+							<li><a href="/manageewayconfiguration">Eway Bill</a></li>
+
+
+							<li><a href="/addaboutme">About Me</a></li>
+
+
+						</ul>
+					</li>
+
+
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">HRMS <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"
+									style="color: black;">Master<span class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/manage_shift_master">Shift Planning Master</a></li>
+								</ul>
+							</li>
+						</ul>
+
+					</li>
+
+
+
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Extras <span
+								class="caret"></span></a>
+
+						<ul class="dropdown-menu">
+
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black;">PB
+									Business Management <span class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/manage_pb_business_dashboard">Dashboard </a></li>
+									<li><a href="/manage_pb_product_master">Product Master </a></li>
+									<li><a href="/manage_pb_rate_master">Rate Master </a></li>
+									<li><a href="/manage_pb_order_management">Order Management </a></li>
+								</ul>
+							</li>
+
+
+
+
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black;">SIM
+									Tracking<span class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/sim_tracking_dashboard">SIM Tracking Map</a></li>
+									<li><a href="/manage_sim_tracking_details">SIM Tracking Ping Details</a></li>
+
+
+
+
+									<li><a href="/manage_sim_tracking_reports">SIM Tracking Reports</a></li>
+
+
+								</ul>
+							</li>
+
+
+
+							<li><a href="/manage_transport_performance">Manage Transport Performance</a></li>
+
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"
+									style="color: black;">Vehicle<span class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/manage_vehicle_insurance_details">Insurance Details</a></li>
+
+								</ul>
+							</li>
+
+
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black;">Vaccine
+									Management <span class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/manage_vaccine_inward">Vaccine Inward</a></li>
+									<li><a href="/manage_vaccine_stock">Vaccine Stock</a></li>
+									<li><a href="/queue_management_system">Queue Management</a></li>
+									<li><a href="/workforce_management_system">Workforce Management</a></li>
+								</ul>
+							</li>
+
+
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: black;">Service
+									Management<span class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/manage_service_master">Service Master</a></li>
+									<li><a href="/manage_service_record_summary">Service Record Summary</a></li>
+									<li><a href="/manage_service_payment_summary">Service Payment Summary</a></li>
+								</ul>
+							</li>
+
+
+
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"
+									style="color: black;">Machinery Management<span
+										class="fa fa-caret-right pull-right"></span></a>
+								<ul class="dropdown-menu sub-menu">
+									<li><a href="/manage_machinery_master">Machinery Master</a></li>
+								</ul>
+							</li>
+
+
+							<li><a href="/vehicle_mileage">Fuel Management</a></li>
+
+							<li><a href="/tito_dashboard">TITO Dashboard</a></li>
+
+
+							<li><a href="/manage_expense_templates">Expense Templates</a></li>
+
+
+
+						</ul>
+
+					</li>
+
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Support <span
+								class="caret"></span></a>
+
+						<ul class="dropdown-menu">
+							<li><a href="/contact_us">Contact Us</a></li>
+							<li><a href="/faq">FAQ's</a></li>
+							<li><a href="/trainings">Trainings</a></li>
+						</ul>
+
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" href="/manageapps">Apps </a>
+					</li>
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- script for reloading notificaion count -->
+
+
+	<div class="container-5">
+
+		<div class="cargofl-loader"></div>
+
+		<!-- include feeback message block -->
+		<style>
+			.feedback .alert {
+				margin-bottom: 10px;
+			}
+
+			/* -- App Store Css-- */
+
+			.AppsContainer {
+				margin: auto;
+				/* width: 80%; */
+
+				display: flex;
+				flex-direction: column;
+			}
+
+			.appsHeader {
+
+				display: flex;
+
+			}
+
+			.appButton {
+				background-color: transparent;
+				border: solid lightgray;
+				border-width: thin;
+				padding: 5px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			.tagButton {
+				background-color: #e7e7e7;
+				border: solid lightgray;
+				border-width: thin;
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+				padding: 5px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			.searchButton {
+				background-color: #e7e7e7;
+				border: solid lightgray;
+				border-width: thin;
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+				padding: 5px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+
+			.appButton:hover {
+				background-image: linear-gradient(lightgray, white);
+			}
+
+			@media only screen and (max-width: 600px) {
+
+				.container-5 .appStoreArea {
+					grid-template-columns: repeat(1, 1fr);
+				}
+
+				.navbar {
+					margin: 0;
+
+				}
+
+				.buttonArea button {
+
+					background-color: gray;
+					width: 50%;
+					font-size: small;
+				}
+			}
+
+			.appStoreArea {
+
+				margin-top: 1rem;
+				display: flex;
+				display: grid;
+				grid-template-columns: repeat(6, 1fr);
+				grid-auto-rows: auto;
+				grid-row-gap: 20px;
+				grid-column-gap: 10px;
+			}
+
+			.container-5 {
+				height: fit-content;
+				margin-bottom: 2rem;
+			}
+
+			.cardsApp {
+
+				border: solid lightgray;
+				border-width: thin;
+				padding: 1rem;
+				padding-right: 1rem;
+				width: 100%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: flex;
+				flex-direction: column;
+				text-align: left;
+
+			}
+
+			.cardsApp:hover {
+
+				/* 9691911676- Nikhil */
+				width: 200px;
+				box-shadow: 2px 2px 2px 2px lightgray;
+			}
+
+			.cardImageArea {
+
+				height: auto;
+				align-items: center;
+			}
+
+			.cardImageArea img {
+				border-radius: 50%
+			}
+
+			.cardsApp.appTitle:hover {
+				overflow: visible;
+			}
+
+			.checked {
+				color: darkgray;
+			}
+
+			.unchecked {
+				color: lightgray;
+			}
+
+			.appTitle {
+				margin-top: 1rem;
+				font-size: medium;
+				padding-bottom: 0.5rem;
+			}
+
+			.appDesc {
+				color: gray;
+				font-size: small;
+				padding-bottom: 0.5rem;
+
+			}
+
+			.appInfo {
+
+				margin-top: 100%;
+			}
+
+			.rating {
+				padding-top: 0.5rem;
+				margin-bottom: auto;
+			}
+
+			/* The Modal */
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 1;
+
+				/* Sit on top */
+				left: 0;
+				top: 0;
+				overflow-wrap: break-word;
+				width: 100%;
+				height: 100%;
+				overflow-wrap: break-word;
+				background-color: rgb(0, 0, 0);
+				background-color: rgba(0, 0, 0, 0.4);
+				overflow: scroll;
+
+			}
+
+			.modal-content img {
+				display: block;
+				width: 20%;
+				margin: auto;
+			}
+
+			.modal-details {}
+
+			.modal-top h3 {
+				border-bottom: solid grey;
+				border-width: thin;
+				padding-bottom: 1rem;
+				font-weight: bold;
+				font-size: large;
+			}
+
+			/* Modal Content/Box */
+			.modal-content {
+				display: flex;
+				flex-direction: column;
+				background-color: #fefefe;
+				margin: 15% auto;
+				padding: 1rem;
+				border: 1px solid #888;
+				width: 50%;
+
+
+			}
+
+			/* The Close Button */
+			.close {
+				color: #aaa;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+			}
+
+			.close:hover,
+			.close:focus {
+				color: black;
+				text-decoration: none;
+				cursor: pointer;
+			}
+		</style>
+
+		<!-- App Store Code -->
+
+		<div class="AppsContainer">
+
+			<div class="appsHeader">
+
+				<div class="buttonArea" style="padding-right:0.5rem ;">
+
+					<button class="appButton" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+						All Apps
+						<button class="appButton">
+							My Apps
+						</button>
+					</button>
+
+				</div>
+
+				<button class="tagButton">
+					<i class="fa fa-tags"></i>
+				</button>
+
+				<input placeholder="Search Tags" style="width: 30%; border:solid 0.5px lightgray;">
+
+				<button class="searchButton" style="margin-left: auto;">
+
+					<i class="fa fa-search"></i>
+
+				</button>
+				<input placeholder="Search" style="width: 20%; border:solid 0.5px lightgray;">
+			</div>
+
+			<div class="appStoreArea">
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			
+
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cardsApp" id="cardsApps">
+
+					<div class="cardImageArea">
+						<img src="../static/images/1.png" />
+					</div>
+
+					<div class="appTitle">
+						Instagram
+					</div>
+
+					<div class="appDesc" maxLength="5">
+						Instagram is an American photo and video sharing social networking
+					</div>
+
+					<div class="rating">
+
+						<i class="fa fa-user"></i>
+
+						<input style="border: none;" type="text" id="regsiterCount" value="0" readonly />
+
+						<button id="myBtn" style="float: right;background-color:var(--primary-color);color: white;">
+							Register Now
+						</button>
+
+					</div>
+					<!-- The Modal -->
+					<div id="myModal" class="modal">
+
+
+						<div class="modal-content">
+							<div class="modal-top">
+								<h3>Manage Transport Performance <span class="close">&times;</span></h3>
+							</div>
+
+							<div class="modal-details">
+								<img src="../static/images/1.png" />
+								<i class="fa fa-user"></i>
+								<input style="border: none;" type="text" id="regsiterCountAgain" value="0" readonly />
+
+								<div class="long-desc">
+
+									<p id="count" onkeyup="count_down(this)">
+										Examples might be simplified to improve reading and learning. Tutorials,
+										references, and examples
+									</p>
+
+								</div>
+								<div class="short-desc">
+									No description available
+								</div>
+
+								<input type='submit' value='Register' id='btClickMe'
+									onclick='saveC(); save(); alertPop(); this.disabled = true;'
+									style="float: right;background-color:var(--primary-color);color: white; margin-top:2rem ;" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="feedback">
+			<div class="alert alert-success alert-hide" id="success_feedback" style="display: none;">
+				<a href="#" class="close" onclick="$('#success_feedback').fadeOut('slow');" aria-label="close">×</a>
+				<strong>Success!</strong> <span class="message_text"></span>
+			</div>
+
+			<div class="alert alert-danger alert-hide" id="error_feedback" style="display: none;">
+				<a href="#" class="close" onclick="$(this).parent().fadeOut('slow');" aria-label="close">×</a>
+				<strong>Error!</strong> <span class="message_text"></span>
+			</div>
+
+			<div class="alert alert-warning alert-hide" id="warning_feedback" style="display: none;">
+				<a href="#" class="close" onclick="$('#warning_feedback').fadeOut('slow');" aria-label="close">×</a>
+				<strong>Warning!</strong> <span class="message_text"></span>
+			</div>
+		</div>
+		<script>
+			function alertPop() {
+				window.alert("Registered Successfully!");
+			}
+
+			function save() {
+				var i = 0;
+				document.getElementById('regsiterCount').value = ++i;
+
+			}
+
+			function sum() {
+				var cards = document.getElementById("cardsApps").innerHTML;
+				for (i = 0; i <= 1; i++) {
+					document.write(cards);
+				}
+			}
+
+			var i = 0;
+			function saveC() {
+				document.getElementById('regsiterCountAgain').value = ++i;
+
+			}
+
+			function myFunction() {
+				var x = document.getElementById("navbar");
+				if (x.className === "navbar") {
+					x.className += " responsive";
+				} else {
+					x.className = "navbar";
+				}
+			}
+		</script>
+
+		<script>
+			var modal = document.getElementById("myModal");
+			var btn = document.getElementById("myBtn");
+			var span = document.getElementsByClassName("close")[0];
+
+			// open the modal
+			btn.onclick = function () {
+				modal.style.display = "block";
+			}
+
+			//  close the modal
+			span.onclick = function () {
+				modal.style.display = "none";
+			}
+
+			// outside of the modal, close it
+			// window.onclick = function (event) {
+			// 	if (event.target == modal) {
+			// 		modal.style.display = "none";
+			// 	}
+			// }
+		</script>
+
+		<script type="text/javascript">
+
+			// var success_feedback_timer;
+			// var error_feedback_timer;
+
+			function show_feedback_message(message_type, message_text) {
+
+				// Shows messages for display_time
+				//
+				// Usage:
+				// 1. show_feedback_message('success', 'Status Updated');
+				// 2. show_feedback_message('error', 'Status Update Failed');
+
+				if (message_type == 'success') {
+					// clearTimeout(success_feedback_timer);
+					$("#error_feedback").fadeOut('slow');
+					$("#warning_feedback").fadeOut('slow');
+					$("#success_feedback").find(".message_text").html(message_text);
+					$("#success_feedback").show();
+					// success_feedback_timer = setTimeout(function() {
+					// 	$("#success_feedback").fadeOut('slow');
+					// }, 5000);
+				}
+				else if (message_type == 'error') {
+					if (typeof (message_text) === 'object') {
+						$("#success_feedback").fadeOut('slow');
+						$("#warning_feedback").fadeOut('slow');
+
+						$("#error_feedback").find(".message_text").html(message_text[0].message);
+
+						for (var i = 1; i < message_text.length; i++) {
+							$clone_obj = $('#error_feedback').clone();
+							$clone_obj.find(".message_text").html(message_text[i].message);
+							$('.feedback').append($clone_obj);
+						}
+						$(".alert-danger").show();
+
+					}
+					else {
+
+						// clearTimeout(error_feedback_timer);
+						$("#success_feedback").fadeOut('slow');
+						$("#warning_feedback").fadeOut('slow');
+						$("#error_feedback").find(".message_text").html(message_text);
+						$("#error_feedback").show();
+
+						// error_feedback_timer = setTimeout(function() {
+						// 	$("#error_feedback").fadeOut('slow');
+						// }, 10000);
+					}
+
+				}
+				else if (message_type == 'warning') {
+					// clearTimeout(error_feedback_timer);
+					$("#success_feedback").fadeOut('slow');
+					$("#error_feedback").fadeOut('slow');
+					$("#warning_feedback").find(".message_text").html(message_text);
+					$("#warning_feedback").show();
+					// error_feedback_timer = setTimeout(function() {
+					// 	$("#error_feedback").fadeOut('slow');
+					// }, 10000);
+				}
+
+			}
+		</script>
+
+
+
+
+
+		<div class="tab-content">
+
+			<!-- <div class="tab-pane fade in active" id="apps">
+
+				<br>
+				<br>
+
+				<div class="row">
+
+					<div class="app-window"></div>
+				</div>
+
+			</div> -->
+
+			<div class="tab-pane fade" id="user_app_settings">
+				<br>
+
+				<div class="bootstrap-table bootstrap3">
+					<div class="fixed-table-toolbar"></div>
+
+					<div class="fixed-table-container" style="padding-bottom: 0px;">
+						<div class="fixed-table-header" style="display: none;">
+							<table></table>
+						</div>
+						<div class="fixed-table-body">
+							<div class="fixed-table-loading table table-bordered table-hover"
+								style="top: 1px; display: none;">
+								<span class="loading-wrap">
+									<span class="loading-text">Loading, please wait</span>
+									<span class="animation-wrap"><span class="animation-dot"></span></span>
+								</span>
+							</div>
+							<table class="table table-hover table-condensed table-bordered" id="user_app_settings_table"
+								data-toggle="table" data-url="/retrieve_user_app_configurations">
+								<thead style="">
+									<tr>
+										<th class="text-center" style="" data-field="0">
+											<div class="th-inner ">#</div>
+											<div class="fht-cell"></div>
+										</th>
+										<th class="no-wrap" style="" data-field="title">
+											<div class="th-inner ">App</div>
+											<div class="fht-cell"></div>
+										</th>
+										<th class="no-wrap" style="" data-field="user_id">
+											<div class="th-inner ">User ID</div>
+											<div class="fht-cell"></div>
+										</th>
+										<th class="no-wrap" style="" data-field="name">
+											<div class="th-inner ">User</div>
+											<div class="fht-cell"></div>
+										</th>
+										<th class="no-wrap" style="" data-field="registration_status">
+											<div class="th-inner ">Status</div>
+											<div class="fht-cell"></div>
+										</th>
+										<th class="no-wrap" style="" data-field="cargofl_approval">
+											<div class="th-inner ">Action
+											</div>
+											<div class="fht-cell"></div>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-index="0">
+										<td class="text-center" style="">1</td>
+										<td class="no-wrap" style="">Service Management</td>
+										<td class="no-wrap" style="">KIN9782</td>
+										<td class="no-wrap" style="">Franchise Deveer Decors</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="1">
+										<td class="text-center" style="">2</td>
+										<td class="no-wrap" style="">Inventory Management</td>
+										<td class="no-wrap" style="">KIN9782</td>
+										<td class="no-wrap" style="">Franchise Deveer Decors</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(56)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="2">
+										<td class="text-center" style="">3</td>
+										<td class="no-wrap" style="">Service Management</td>
+										<td class="no-wrap" style="">TZU7204</td>
+										<td class="no-wrap" style="">Email Test</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="3">
+										<td class="text-center" style="">4</td>
+										<td class="no-wrap" style="">POD Clearance</td>
+										<td class="no-wrap" style="">TZU7204</td>
+										<td class="no-wrap" style="">Email Test</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="4">
+										<td class="text-center" style="">5</td>
+										<td class="no-wrap" style="">POD Clearance</td>
+										<td class="no-wrap" style="">KIN9782</td>
+										<td class="no-wrap" style="">Franchise Deveer Decors</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(53)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="5">
+										<td class="text-center" style="">6</td>
+										<td class="no-wrap" style="">Service Management</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="6">
+										<td class="text-center" style="">7</td>
+										<td class="no-wrap" style="">POD Clearance</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="7">
+										<td class="text-center" style="">8</td>
+										<td class="no-wrap" style="">Party Login Portal</td>
+										<td class="no-wrap" style="">KIN9782</td>
+										<td class="no-wrap" style="">Franchise Deveer Decors</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="8">
+										<td class="text-center" style="">9</td>
+										<td class="no-wrap" style="">SIM Based Tracking</td>
+										<td class="no-wrap" style="">EXU3142</td>
+										<td class="no-wrap" style="">Franchise Sweta</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="9">
+										<td class="text-center" style="">10</td>
+										<td class="no-wrap" style="">Tyre Management System</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="10">
+										<td class="text-center" style="">11</td>
+										<td class="no-wrap" style="">Inventory Management</td>
+										<td class="no-wrap" style="">ZKJ2188</td>
+										<td class="no-wrap" style="">Franchise Notify</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="11">
+										<td class="text-center" style="">12</td>
+										<td class="no-wrap" style="">Notify</td>
+										<td class="no-wrap" style="">ZKJ2188</td>
+										<td class="no-wrap" style="">Franchise Notify</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="12">
+										<td class="text-center" style="">13</td>
+										<td class="no-wrap" style="">Expense Automation System</td>
+										<td class="no-wrap" style="">AEA0695</td>
+										<td class="no-wrap" style="">Franchise Darpan Transport</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="13">
+										<td class="text-center" style="">14</td>
+										<td class="no-wrap" style="">Inventory Management</td>
+										<td class="no-wrap" style="">EXU3142</td>
+										<td class="no-wrap" style="">Franchise Sweta</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="14">
+										<td class="text-center" style="">15</td>
+										<td class="no-wrap" style="">Inventory Management</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="15">
+										<td class="text-center" style="">16</td>
+										<td class="no-wrap" style="">Trucker Login Portal</td>
+										<td class="no-wrap" style="">TZU7204</td>
+										<td class="no-wrap" style="">Email Test</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="16">
+										<td class="text-center" style="">17</td>
+										<td class="no-wrap" style="">Trucker Login Portal</td>
+										<td class="no-wrap" style="">EXU3142</td>
+										<td class="no-wrap" style="">Franchise Sweta</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="17">
+										<td class="text-center" style="">18</td>
+										<td class="no-wrap" style="">Notify</td>
+										<td class="no-wrap" style="">TZU7204</td>
+										<td class="no-wrap" style="">Email Test</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="18">
+										<td class="text-center" style="">19</td>
+										<td class="no-wrap" style="">Notify</td>
+										<td class="no-wrap" style="">NVX5202</td>
+										<td class="no-wrap" style="">Franchise Test</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="19">
+										<td class="text-center" style="">20</td>
+										<td class="no-wrap" style="">Notify</td>
+										<td class="no-wrap" style="">EXU3142</td>
+										<td class="no-wrap" style="">Franchise Sweta</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="20">
+										<td class="text-center" style="">21</td>
+										<td class="no-wrap" style="">Notify</td>
+										<td class="no-wrap" style="">IPK4703</td>
+										<td class="no-wrap" style="">Knorr Bremse</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(34)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="21">
+										<td class="text-center" style="">22</td>
+										<td class="no-wrap" style="">V-Track</td>
+										<td class="no-wrap" style="">KIN9782</td>
+										<td class="no-wrap" style="">Franchise Deveer Decors</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(33)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="22">
+										<td class="text-center" style="">23</td>
+										<td class="no-wrap" style="">zsedmfajsbdf</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="23">
+										<td class="text-center" style="">24</td>
+										<td class="no-wrap" style="">Trucker Login Portal</td>
+										<td class="no-wrap" style="">WMA5420</td>
+										<td class="no-wrap" style="">Franchise Kider India Pvt Ltd</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="24">
+										<td class="text-center" style="">25</td>
+										<td class="no-wrap" style="">Trucker Login Portal</td>
+										<td class="no-wrap" style="">KIN9782</td>
+										<td class="no-wrap" style="">Franchise Deveer Decors</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="25">
+										<td class="text-center" style="">26</td>
+										<td class="no-wrap" style="">Trucker Login Portal</td>
+										<td class="no-wrap" style="">CHW4309</td>
+										<td class="no-wrap" style="">Franchise Dispatcher Testing</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="26">
+										<td class="text-center" style="">27</td>
+										<td class="no-wrap" style="">Trucker Login Portal</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="27">
+										<td class="text-center" style="">28</td>
+										<td class="no-wrap" style="">Battery Management System</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(20)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="28">
+										<td class="text-center" style="">29</td>
+										<td class="no-wrap" style="">Battery Management System</td>
+										<td class="no-wrap" style="">CLL3116</td>
+										<td class="no-wrap" style="">Sattva Transport</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="29">
+										<td class="text-center" style="">30</td>
+										<td class="no-wrap" style="">V-Track</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(18)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="30">
+										<td class="text-center" style="">31</td>
+										<td class="no-wrap" style="">Tracknsecur</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(17)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="31">
+										<td class="text-center" style="">32</td>
+										<td class="no-wrap" style="">Tracknsecur</td>
+										<td class="no-wrap" style="">CLL3116</td>
+										<td class="no-wrap" style="">Sattva Transport</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="32">
+										<td class="text-center" style="">33</td>
+										<td class="no-wrap" style="">SIM Tracking</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="33">
+										<td class="text-center" style="">34</td>
+										<td class="no-wrap" style="">SIM Tracking</td>
+										<td class="no-wrap" style="">AUB6653</td>
+										<td class="no-wrap" style="">Franchise Safe Reach Logistics</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="34">
+										<td class="text-center" style="">35</td>
+										<td class="no-wrap" style="">V-Track</td>
+										<td class="no-wrap" style="">AUB6653</td>
+										<td class="no-wrap" style="">Franchise Safe Reach Logistics</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(13)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="35">
+										<td class="text-center" style="">36</td>
+										<td class="no-wrap" style="">TITO</td>
+										<td class="no-wrap" style="">AUB6653</td>
+										<td class="no-wrap" style="">Franchise Safe Reach Logistics</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="36">
+										<td class="text-center" style="">37</td>
+										<td class="no-wrap" style="">Expense Automation System</td>
+										<td class="no-wrap" style="">AUB6653</td>
+										<td class="no-wrap" style="">Franchise Safe Reach Logistics</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="37">
+										<td class="text-center" style="">38</td>
+										<td class="no-wrap" style="">Expense Automation System</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="38">
+										<td class="text-center" style="">39</td>
+										<td class="no-wrap" style="">TITO</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="39">
+										<td class="text-center" style="">40</td>
+										<td class="no-wrap" style="">Notify</td>
+										<td class="no-wrap" style="">WMA5420</td>
+										<td class="no-wrap" style="">Franchise Kider India Pvt Ltd</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="40">
+										<td class="text-center" style="">41</td>
+										<td class="no-wrap" style="">Notify</td>
+										<td class="no-wrap" style="">FOY0320</td>
+										<td class="no-wrap" style="">Franchise Dhembare Brothers</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="41">
+										<td class="text-center" style="">42</td>
+										<td class="no-wrap" style="">Tyre Management System</td>
+										<td class="no-wrap" style="">KIN9782</td>
+										<td class="no-wrap" style="">Franchise Deveer Decors</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="42">
+										<td class="text-center" style="">43</td>
+										<td class="no-wrap" style="">Tyre Management System</td>
+										<td class="no-wrap" style="">CLL3116</td>
+										<td class="no-wrap" style="">Sattva Transport</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="43">
+										<td class="text-center" style="">44</td>
+										<td class="no-wrap" style="">TITO</td>
+										<td class="no-wrap" style="">KIN9782</td>
+										<td class="no-wrap" style="">Franchise Deveer Decors</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="44">
+										<td class="text-center" style="">45</td>
+										<td class="no-wrap" style="">TITO</td>
+										<td class="no-wrap" style="">QNG7043</td>
+										<td class="no-wrap" style="">Franchise Dnx Cargo Pvt Ltd</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+									<tr data-index="45">
+										<td class="text-center" style="">46</td>
+										<td class="no-wrap" style="">V-Track</td>
+										<td class="no-wrap" style="">QNG7043</td>
+										<td class="no-wrap" style="">Franchise Dnx Cargo Pvt Ltd</td>
+										<td class="no-wrap" style="">Pending</td>
+										<td class="no-wrap" style=""><a onclick="approve_request(2)"
+												style="cursor: pointer;">Approve</a></td>
+									</tr>
+									<tr data-index="46">
+										<td class="text-center" style="">47</td>
+										<td class="no-wrap" style="">V-Track</td>
+										<td class="no-wrap" style="">CLL3116</td>
+										<td class="no-wrap" style="">Sattva Transport</td>
+										<td class="no-wrap" style="">Completed</td>
+										<td class="no-wrap" style="">-</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="fixed-table-footer">
+							<table>
+								<thead>
+									<tr></tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+					<div class="fixed-table-pagination" style="display: none;"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- include footer -->
+	<style>
+		.cargofl-footer {
+			background-color: var(--primary-color);
+			/*border-top: solid 2px var(--primary-color);*/
+			color: var(--tertiary-color);
+			font-size: 11px;
+		}
+
+		.cargofl-footer a {
+			color: inherit;
+		}
+	</style>
+
+	<div class="cargofl-footer flex-container">
+		<span class="flex-item-3">
+			<a href="#">Privacy Policy</a> | <a href="#">Terms &amp; Conditions</a>
+		</span>
+		<span class="flex-item-3 text-center">
+			CargoFL Version 5.2.19
+		</span>
+		<span class="flex-item-3 text-right">
+			Powered by CargoFL (Innoctive Technologies Pvt Ltd)
+		</span>
+	</div>
+
+
+
+	<!-- Button trigger modal -->
+	<div class="modal fade" id="appsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Cargofl Apps <span data-dismiss="modal" class="close pull-right"
+							aria-hidden="true">×</span> </h4>
+				</div>
+				<div class="modal-body">
+					<p id="appMessage"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  -->
+
+
+	<div id="app_modal" class="modal fade" data-toggel="modal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"></h4>
+				</div>
+
+				<div class="modal-body">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<script>
+
+		// set menu entry as active
+		hilightMenu("Apps ");
+
+
+
+		$(".cargofl-loader").hide();
+
+	</script>
+
+	<div id="screenleapDiv" style="position:fixed;right:1px;bottom:1px;visibility:hidden;width:1px;height:1px"
+		installed="true" sharing="false" eventlisteneradded="true"></div>
+</body>
+
+</html>
